@@ -2,7 +2,7 @@ version: '3'
 
 services:
   flask-backend:
-    build: ./backend
+    build: ./flask-backend
     ports:
       - "5000:5000"
     depends_on:
@@ -11,9 +11,17 @@ services:
       - MONGO_URI=mongodb://mongodb-database:27017
 
   streamlit-frontend:
-    build: ./frontend
+    build: ./streamlit-frontend
     ports:
       - "8080:8080"
+    depends_on:
+      - flask-backend
+      - mongodb-database
+
+  pywebio-frontend:
+    build: ./pywebio-frontend
+    ports:
+      - "8081:8081"
     depends_on:
       - flask-backend
       - mongodb-database
