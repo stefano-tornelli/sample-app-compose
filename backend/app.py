@@ -13,19 +13,6 @@ mongo_uri = os.getenv("MONGO_URI", "mongodb://localhost:27017")
 mongodb_client = MongoClient(mongo_uri)
 
 
-@app.route("/create_db", methods=["POST"])
-@swag_from(
-    "swagger/create_db.yml", validation=False, endpoint="create_db", methods=["POST"]
-)
-def create_db():
-    db_name = request.json.get("db_name")
-    if db_name:
-        mongodb_client[db_name]
-        message = f"Database {db_name} created successfully"
-        return jsonify(message=message), 200
-    return jsonify(message="Database name is required"), 400
-
-
 @app.route("/create_collection", methods=["POST"])
 @swag_from(
     "swagger/create_collection.yml",
@@ -127,12 +114,12 @@ def list_documents():
     )
 
 
-@app.route("/delete_collection", methods=["POST"])
+@app.route("/delete_collection", methods=["DELETE"])
 @swag_from(
     "swagger/delete_collection.yml",
     validation=False,
     endpoint="delete_collection",
-    methods=["POST"],
+    methods=["DELETE"],
 )
 def delete_collection():
     db_name = request.json.get("db_name")
@@ -149,9 +136,9 @@ def delete_collection():
     return jsonify(message="Database name and collection name are required"), 400
 
 
-@app.route("/delete_db", methods=["POST"])
+@app.route("/delete_db", methods=["DELETE"])
 @swag_from(
-    "swagger/delete_db.yml", validation=False, endpoint="delete_db", methods=["POST"]
+    "swagger/delete_db.yml", validation=False, endpoint="delete_db", methods=["DELETE"]
 )
 def delete_db():
     db_name = request.json.get("db_name")

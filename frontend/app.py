@@ -30,13 +30,6 @@ if st.button("List Documents"):
     )
     st.json(response.json())
 
-# Create a new database
-st.header("Create a New Database")
-db_name = st.text_input("Database Name")
-if st.button("Create Database"):
-    response = requests.post(f"{BASE_URL}/create_db", json={"db_name": db_name})
-    st.json(response.json())
-
 # Create a new collection
 st.header("Create a New Collection")
 db_name_for_collection = st.text_input("Database Name for Collection")
@@ -82,7 +75,7 @@ st.header("Delete a Collection")
 db_name_for_delete_collection = st.text_input("Database Name for Delete Collection")
 collection_name_to_delete = st.text_input("Collection Name to Delete")
 if st.button("Delete Collection"):
-    response = requests.post(
+    response = requests.delete(
         f"{BASE_URL}/delete_collection",
         json={
             "db_name": db_name_for_delete_collection,
@@ -95,7 +88,7 @@ if st.button("Delete Collection"):
 st.header("Delete a Database")
 db_name_to_delete = st.text_input("Database Name to Delete")
 if st.button("Delete Database"):
-    response = requests.post(
+    response = requests.delete(
         f"{BASE_URL}/delete_db", json={"db_name": db_name_to_delete}
     )
     st.json(response.json())
