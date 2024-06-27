@@ -1,0 +1,25 @@
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    schema:
+      type: object
+      required:
+        - db_name
+        - collection_name
+        - document
+      properties:
+        db_name:
+          type: string
+        collection_name:
+          type: string
+        document:
+          type: object
+responses:
+  201:
+    description: Document inserted
+

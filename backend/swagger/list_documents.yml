@@ -1,0 +1,8 @@
+consumes:
+  - application/json
+produces:
+  - application/json
+responses:
+  200:
+    description: Databases list
+
