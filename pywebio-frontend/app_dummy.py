@@ -1,4 +1,4 @@
-from pywebio.input import input, textarea, input_group, TEXT, TEXTAREA
+from pywebio.input import input, input_group, TEXT, TEXTAREA
 from pywebio.output import (
     put_text,
     put_error,
