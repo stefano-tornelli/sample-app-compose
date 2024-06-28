@@ -37,6 +37,7 @@ Make sure you have Docker and Docker Compose installed on your system.
 - **MongoDB Server**: Accessible at `mongodb://mongo:27017` from within the Docker network.
 - **Flask API**: Accessible at `http://localhost:5000`. Swagger documentation is available at `http://localhost:5000/apidocs`.
 - **Streamlit Frontend**: Accessible at `http://localhost:8080`.
+- **PyWebIO Frontend**: Accessible at `http://localhost:8081`.
 
 ## Usage
 
@@ -56,9 +57,13 @@ Refer to the Swagger documentation at `http://localhost:5000/apidocs` for detail
 
 The Streamlit frontend provides a simple interface to test the backend API endpoints. Use the buttons and text input fields to interact with the API and view the responses on the screen.
 
+### (WIP) PyWebIO Frontend
+
+A test for a PyWebIO frontend, not currently working
+
 ## Docker Compose Configuration
 
-The `docker-compose.yml` file defines the three services:
+The `docker-compose.yml` file defines the four services:
 
 ```yaml
 version: '3'
@@ -77,6 +82,14 @@ services:
     build: ./frontend
     ports:
       - "8080:8080"
+    depends_on:
+      - flask-backend
+      - mongodb-database
+      
+  pywebio-frontend:
+    build: ./pywebio-frontend
+    ports:
+      - "8081:8081"
     depends_on:
       - flask-backend
       - mongodb-database
